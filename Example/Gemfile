@@ -2,5 +2,5 @@ source 'https://rubygems.org/'
 
 gem 'cocoapods', '>= 1.8.4'
 gem 'xcpretty','~> 0.3.0'
-# gem 'cocoapods-unit-test','>= 0.0.1'
-gem 'cocoapods-unit-test',:path => '/Users/zoe/Desktop/Github/cocoapods-unit-test'
+gem 'cocoapods-unit-test','~> 1.0'
+
