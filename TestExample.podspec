@@ -1,42 +1,30 @@
-#
-# Be sure to run `pod lib lint TestExample.podspec' to ensure this is a
-# valid spec before submitting.
-#
-# Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
-#
 
 Pod::Spec.new do |s|
   s.name             = 'TestExample'
   s.version          = '0.1.0'
   s.summary          = 'A short description of TestExample.'
-
-# This description is used to generate tags and improve search results.
-#   * Think: What does it do? Why did you write it? What is the focus?
-#   * Try to keep it short, snappy and to the point.
-#   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!
-
-  s.description      = <<-DESC
-TODO: Add long description of the pod here.
-                       DESC
+  s.description      = 'TestExample to show how to use Unit-Test'
 
   s.homepage         = 'https://github.com/bob/TestExample'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'bob' => 'bob170731@gmail.com' }
   s.source           = { :git => 'https://github.com/bob/TestExample.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
-
   s.ios.deployment_target = '8.0'
+  s.pod_target_xcconfig = { 
+    'DEFINES_MODULE' => 'YES',
+  }
 
-  s.source_files = 'TestExample/Classes/**/*'
+  s.subspec 'Core' do |c|
+    c.source_files = 'TestExample/Classes/**/*{h,m}'
+    c.public_header_files = 'TestExample/Classes/*.{h}'
+    c.frameworks = 'UIKit','Foundation'
+  end
+
+  s.test_spec 'Tests' do |h|
+    h.source_files = 'TestExample/Tests/**/*.{h,m}'
+    h.dependency 'TestExample/Core'
+    h.dependency 'XcodeCoverage','>= 1.3.2'
+    h.frameworks = 'UIKit','Foundation'
+  end
   
-  # s.resource_bundles = {
-  #   'TestExample' => ['TestExample/Assets/*.png']
-  # }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
